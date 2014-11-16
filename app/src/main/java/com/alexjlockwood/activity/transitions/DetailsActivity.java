@@ -93,12 +93,14 @@ public class DetailsActivity extends Activity implements ViewPager.OnPageChangeL
         TransitionSet enterTransition = new TransitionSet();
 
         // Play a circular reveal animation starting beneath the shared element.
-        Transition circularReveal = new CircularReveal(sharedElement);
+        Transition circularReveal = new Slide(Gravity.TOP);//new CircularReveal(sharedElement);
+        circularReveal.setDuration(400);
         circularReveal.addTarget(rootView.findViewById(R.id.reveal_container));
         enterTransition.addTransition(circularReveal);
 
         // Slide the cards in through the bottom of the screen.
         Transition cardSlide = new Slide(Gravity.BOTTOM);
+        cardSlide.setDuration(400);
         cardSlide.addTarget(rootView.findViewById(R.id.text_container));
         enterTransition.addTransition(cardSlide);
 
@@ -130,12 +132,14 @@ public class DetailsActivity extends Activity implements ViewPager.OnPageChangeL
         TransitionSet slideFade = new TransitionSet();
         slideFade.addTarget(rootView.findViewById(R.id.reveal_container));
         slideFade.addTransition(new Slide(Gravity.TOP));
+        slideFade.setDuration(400);
         slideFade.addTransition(new Fade());
         returnTransition.addTransition(slideFade);
 
         // Slide the cards off the bottom of the screen.
         Transition cardSlide = new Slide(Gravity.BOTTOM);
         cardSlide.addTarget(rootView.findViewById(R.id.text_container));
+        cardSlide.setDuration(400);
         returnTransition.addTransition(cardSlide);
 
         return returnTransition;
