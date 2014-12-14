@@ -29,20 +29,28 @@
 
         </FrameLayout>
 
-        <LinearLayout
-            android:id="@+id/text_container"
+        <WebView
+            android:id="@+id/webview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:transitionGroup="true">
+            android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/title"
-                style="@style/DetailsTextTitle"/>
+        <!--<LinearLayout-->
+            <!--android:id="@+id/text_container"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--android:transitionGroup="true">-->
 
-            <TextView
-                android:id="@+id/description"
-                style="@style/DetailsTextDescription"/>
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/title"-->
+                <!--style="@style/DetailsTextTitle"/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/description"-->
+                <!--style="@style/DetailsTextDescription"/>-->
+        <!--</LinearLayout>-->
     </LinearLayout>
+
+
+
 </ScrollView>

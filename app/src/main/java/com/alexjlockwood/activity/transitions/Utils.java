@@ -28,6 +28,17 @@ public final class Utils {
             R.drawable.jonny_thom, R.drawable.thom6,
     };
 
+    public static final String[] RADIOHEAD_ALBUM_URLS = {
+            "http://en.wikipedia.org/wiki/Pablo_Honey",
+            "http://en.wikipedia.org/wiki/The_Bends",
+            "http://en.wikipedia.org/wiki/OK_Computer",
+            "http://en.wikipedia.org/wiki/Kid_A",
+            "http://en.wikipedia.org/wiki/Amnesiac_(album)",
+            "http://en.wikipedia.org/wiki/Hail_to_the_Thief",
+            "http://en.wikipedia.org/wiki/In_Rainbows",
+            "http://en.wikipedia.org/wiki/The_King_of_Limbs",
+    };
+
     /**
      * Returns true if {@param view} is contained within {@param container}'s bounds.
      */

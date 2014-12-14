@@ -99,7 +99,8 @@ public class DetailsActivity extends Activity implements ViewPager.OnPageChangeL
 
         // Slide the cards in through the bottom of the screen.
         Transition cardSlide = new Slide(Gravity.BOTTOM);
-        cardSlide.addTarget(rootView.findViewById(R.id.text_container));
+        //cardSlide.addTarget(rootView.findViewById(R.id.text_container));
+        cardSlide.addTarget(rootView.findViewById(R.id.webview));
         enterTransition.addTransition(cardSlide);
 
         // Don't fade the navigation/status bars.
@@ -135,7 +136,8 @@ public class DetailsActivity extends Activity implements ViewPager.OnPageChangeL
 
         // Slide the cards off the bottom of the screen.
         Transition cardSlide = new Slide(Gravity.BOTTOM);
-        cardSlide.addTarget(rootView.findViewById(R.id.text_container));
+        //cardSlide.addTarget(rootView.findViewById(R.id.text_container));
+        cardSlide.addTarget(rootView.findViewById(R.id.webview));
         returnTransition.addTransition(cardSlide);
 
         return returnTransition;
