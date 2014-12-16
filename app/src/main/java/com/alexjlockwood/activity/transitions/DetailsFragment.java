@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import static com.alexjlockwood.activity.transitions.Utils.RADIOHEAD_ALBUM_NAMES
 import static com.alexjlockwood.activity.transitions.Utils.RADIOHEAD_BACKGROUND_IDS;
 
 public class DetailsFragment extends Fragment {
+    private static int sCounter = 0;
+
     private static final String TAG = "DetailsFragment";
     private static final boolean DEBUG = true;
 
@@ -40,16 +43,22 @@ public class DetailsFragment extends Fragment {
         ImageView headerImage = (ImageView) revealContainer.findViewById(R.id.header_image);
         //View infoText = root.findViewById(R.id.text_container);
         //TextView titleText = (TextView) infoText.findViewById(R.id.title);
-        WebView webView = (WebView) root.findViewById(R.id.webview);
+        final WebView webView = (WebView) root.findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient());
+        webView.setTransitionGroup(sCounter++ % 2 != 0);
         ImageView backgroundImage = (ImageView) revealContainer.findViewById(R.id.background_image);
 
-        int selectedPosition = getArguments().getInt(ARG_SELECTED_IMAGE_POSITION);
+        final int selectedPosition = getArguments().getInt(ARG_SELECTED_IMAGE_POSITION);
         headerImage.setTransitionName(RADIOHEAD_ALBUM_NAMES[selectedPosition]);
         headerImage.setImageResource(RADIOHEAD_ALBUM_IDS[selectedPosition]);
         //titleText.setText(RADIOHEAD_ALBUM_NAMES[selectedPosition]);
         if (selectedPosition == 2) {
-            webView.loadUrl(Utils.RADIOHEAD_ALBUM_URLS[selectedPosition]);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    webView.loadUrl(Utils.RADIOHEAD_ALBUM_URLS[selectedPosition]);
+                }
+            }, 500);
         }
 
         root.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -61,14 +70,16 @@ public class DetailsFragment extends Fragment {
             }
         });
 
-        int imageResource = RADIOHEAD_BACKGROUND_IDS[selectedPosition];
-        Bitmap bitmap = BITMAP_CACHE.get(imageResource);
-        if (BITMAP_CACHE.get(imageResource) == null) {
-            backgroundImage.setImageResource(RADIOHEAD_BACKGROUND_IDS[selectedPosition]);
-            bitmap = (((BitmapDrawable) backgroundImage.getDrawable()).getBitmap());
-            BITMAP_CACHE.put(imageResource, bitmap);
-        } else {
-            backgroundImage.setImageBitmap(bitmap);
+        if (selectedPosition == 2) {
+            int imageResource = RADIOHEAD_BACKGROUND_IDS[selectedPosition];
+            Bitmap bitmap = BITMAP_CACHE.get(imageResource);
+            if (BITMAP_CACHE.get(imageResource) == null) {
+                backgroundImage.setImageResource(RADIOHEAD_BACKGROUND_IDS[selectedPosition]);
+                bitmap = (((BitmapDrawable) backgroundImage.getDrawable()).getBitmap());
+                BITMAP_CACHE.put(imageResource, bitmap);
+            } else {
+                backgroundImage.setImageBitmap(bitmap);
+            }
         }
 
         return root;

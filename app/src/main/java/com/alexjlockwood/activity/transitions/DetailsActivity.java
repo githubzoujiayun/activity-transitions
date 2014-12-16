@@ -114,10 +114,11 @@ public class DetailsActivity extends Activity implements ViewPager.OnPageChangeL
         enterTransition.addListener(new TransitionListenerAdapter() {
             @Override
             public void onTransitionEnd(Transition transition) {
-                backgroundImage.animate().alpha(1f).setDuration(2000);
+                backgroundImage.animate().alpha(1f).setDuration(1000);
             }
         });
 
+        enterTransition.setDuration(500);
         return enterTransition;
     }
 
@@ -140,6 +141,7 @@ public class DetailsActivity extends Activity implements ViewPager.OnPageChangeL
         cardSlide.addTarget(rootView.findViewById(R.id.webview));
         returnTransition.addTransition(cardSlide);
 
+        returnTransition.setDuration(500);
         return returnTransition;
     }
 
@@ -163,6 +165,9 @@ public class DetailsActivity extends Activity implements ViewPager.OnPageChangeL
         pager.setAdapter(mAdapter);
         pager.setOnPageChangeListener(this);
         pager.setCurrentItem(mCurrentPosition);
+
+        getWindow().getSharedElementEnterTransition().setDuration(400);
+        getWindow().getSharedElementReturnTransition().setDuration(400);
     }
 
     @Override
